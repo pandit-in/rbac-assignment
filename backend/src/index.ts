@@ -25,7 +25,7 @@ app.use(
 const apiRouter = express.Router();
 
 // Auth routes - mounted directly on app to prevent path stripping in apiRouter
-app.all("/api/auth/*splat", toNodeHandler(auth));
+app.use("/api/auth", toNodeHandler(auth));
 
 apiRouter.get("/me", async (req, res) => {
   const session = await auth.api.getSession({

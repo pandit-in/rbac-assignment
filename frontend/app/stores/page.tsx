@@ -79,9 +79,9 @@ export default function StoresPage() {
 
   const filteredStores = stores.filter(
     (store: Store) =>
-      store.name.toLowerCase().includes(search.toLowerCase()) ||
-      store.address.toLowerCase().includes(search.toLowerCase()) ||
-      store.ownerEmail?.toLowerCase().includes(search.toLowerCase())
+      (store.name?.toLowerCase() || "").includes(search.toLowerCase()) ||
+      (store.address?.toLowerCase() || "").includes(search.toLowerCase()) ||
+      (store.ownerEmail?.toLowerCase() || "").includes(search.toLowerCase())
   )
 
   return (
