@@ -73,7 +73,8 @@ export default function SettingsPage() {
     values: {
       name: session?.user?.name || "",
       email: session?.user?.email || "",
-      address: session?.user?.address || "",
+      address: (session?.user as any)?.address || "",
+
       currentPassword: "",
       newPassword: "",
     },
@@ -86,7 +87,8 @@ export default function SettingsPage() {
         await authClient.updateUser({
           name: data.name,
           address: data.address,
-        })
+        } as any)
+
 
         // Then change password
         const result = await authClient.changePassword({
