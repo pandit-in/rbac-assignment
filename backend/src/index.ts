@@ -9,9 +9,14 @@ import ratingsRouter from "./routes/ratings.js";
 import storesRouter from "./routes/stores.js";
 
 const app = express();
+app.set("trust proxy", true); // Required for secure cookies on Render/Vercel
 const port = process.env.PORT || 3001;
 
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
 app.use(
   cors({
     origin:

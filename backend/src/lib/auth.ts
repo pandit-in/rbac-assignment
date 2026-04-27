@@ -5,10 +5,7 @@ import { db } from "../db/index.js"; // your drizzle instance
 import * as schema from "../db/schema/index.js";
 
 export const auth = betterAuth({
-  baseURL:
-    process.env.NODE_ENV === "production"
-      ? process.env.BETTER_AUTH_URL
-      : "http://localhost:3001",
+  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3001",
   database: drizzleAdapter(db, {
     provider: "pg",
     schema,
