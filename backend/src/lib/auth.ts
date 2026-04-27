@@ -36,5 +36,9 @@ export const auth = betterAuth({
       ? [process.env.FRONTEND_URL.replace(/\/$/, "")]
       : []),
   ],
+  advanced: {
+    useSecureCookies: true,
+    crossSubdomainCookies: false,
+  },
   plugins: [admin()],
 });

@@ -36,6 +36,9 @@ app.use(
         return callback(null, true);
       }
 
+      // Allow Vercel frontend
+      if (origin.includes("vercel.app")) return callback(null, true);
+
       callback(new Error("Not allowed by CORS"), false);
     },
     credentials: true,
