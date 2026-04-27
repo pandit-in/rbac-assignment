@@ -21,7 +21,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? process.env.FRONTEND_URL
+        ? (process.env.FRONTEND_URL?.replace(/\/$/, "") || "https://rbac-store.vercel.app")
         : "http://localhost:3000",
     credentials: true,
   }),
