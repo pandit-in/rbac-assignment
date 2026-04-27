@@ -33,18 +33,5 @@ export const auth = betterAuth({
     "http://localhost:3003",
     ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
   ],
-
-  advanced: {
-    useSecureCookies: process.env.NODE_ENV === "production",
-    cookieOptions: {
-      path: "/",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      secure: process.env.NODE_ENV === "production",
-    },
-    crossSubdomainCookies: {
-      enabled: process.env.NODE_ENV === "production",
-    },
-  },
-
   plugins: [admin()],
 });
