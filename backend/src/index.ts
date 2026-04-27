@@ -9,6 +9,7 @@ import ratingsRouter from "./routes/ratings.js"
 import storesRouter from "./routes/stores.js"
 
 const app = express()
+app.set("trust proxy", true)
 const port = process.env.PORT || 3001
 
 app.use(express.json())
