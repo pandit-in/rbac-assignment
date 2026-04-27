@@ -59,7 +59,7 @@ export default function AdminCreateUserPage() {
           password: data.password,
           address: data.address,
           role: data.role,
-        })
+        } as any)
 
         if (result.error) {
           console.error("Create user error:", result.error)
