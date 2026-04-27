@@ -4,8 +4,9 @@ import { adminClient } from "better-auth/client/plugins"
 export const authClient = createAuthClient({
   baseURL:
     process.env.NEXT_PUBLIC_BETTER_AUTH_URL ||
-    (typeof window !== "undefined" && !window.location.hostname.includes("localhost")
-      ? "/_/backend/api/auth"
+    (typeof window !== "undefined" &&
+    !window.location.hostname.includes("localhost")
+      ? "/api/auth"
       : "http://localhost:3001/api/auth"),
 
   user: {
