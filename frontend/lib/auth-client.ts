@@ -5,8 +5,8 @@ export const authClient = createAuthClient({
   baseURL:
     process.env.NEXT_PUBLIC_BETTER_AUTH_URL ||
     (typeof window !== "undefined" && !window.location.hostname.includes("localhost")
-      ? "/_/backend"
-      : "http://localhost:3001"),
+      ? "/_/backend/api/auth"
+      : "http://localhost:3001/api/auth"),
 
   user: {
     additionalFields: {
