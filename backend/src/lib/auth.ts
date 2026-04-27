@@ -33,5 +33,8 @@ export const auth = betterAuth({
     "http://localhost:3003",
     ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
   ],
+  advanced: {
+    useSecureCookies: true,
+  },
   plugins: [admin()],
 });
