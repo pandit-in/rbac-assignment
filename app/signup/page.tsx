@@ -61,22 +61,24 @@ export default function SignupPage() {
         } as any)
         if (result.error) {
           console.error("Sign up error:", result.error)
-          toast(
-            "Error: " +
-              (result.error.message ||
-                result.error.statusText ||
-                "Failed to create account")
-          )
+          let errorMessage = "Failed to create account. Please try again."
+          
+          if (result.error.code === "USER_ALREADY_EXISTS") {
+            errorMessage = "An account with this email already exists. Please use a different email or sign in."
+          } else if (result.error.message) {
+            errorMessage = result.error.message
+          }
+
+          toast.error(errorMessage)
         } else {
-          toast("Account created successfully")
+          toast.success("Account created successfully")
           router.push("/")
         }
       } catch (error) {
         const e = error as Error
         console.error("Catch block error:", e)
-        toast(
-          "Connection Error: " +
-            (e.message || "Failed to connect to auth server")
+        toast.error(
+          "Connection Error: " + (e.message || "Failed to connect to auth server")
         )
       }
     })

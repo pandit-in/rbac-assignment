@@ -60,22 +60,24 @@ export default function SigninPage() {
 
         if (result.error) {
           console.error("Sign in error:", result.error)
-          toast(
-            "Error: " +
-              (result.error.message ||
-                result.error.statusText ||
-                "Invalid credentials")
-          )
+          let errorMessage = "Invalid credentials. Please check your email and password."
+          
+          if (result.error.code === "INVALID_EMAIL_OR_PASSWORD") {
+            errorMessage = "Incorrect email or password. Please try again."
+          } else if (result.error.message) {
+            errorMessage = result.error.message
+          }
+
+          toast.error(errorMessage)
         } else {
-          toast("Signed in successfully")
+          toast.success("Signed in successfully")
           router.push("/")
         }
       } catch (error) {
         const e = error as Error
         console.error("Catch block error:", e)
-        toast(
-          "Connection Error: " +
-            (e.message || "Failed to connect to auth server")
+        toast.error(
+          "Connection Error: " + (e.message || "Failed to connect to auth server")
         )
       }
     })

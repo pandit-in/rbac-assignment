@@ -38,7 +38,15 @@ export default function Header() {
               </Link>
               <Button
                 variant="destructive"
-                onClick={() => authClient.signOut()}
+                onClick={async () => {
+                  await authClient.signOut({
+                    fetchOptions: {
+                      onSuccess: () => {
+                        window.location.href = "/signin"
+                      },
+                    },
+                  })
+                }}
               >
                 Sign Out
               </Button>
