@@ -38,7 +38,8 @@ router.post(
       }
 
       // If admin, they can specify an ownerId. Otherwise, use current user id.
-      const targetOwnerId = req.user?.role === "admin" && ownerId ? ownerId : req.user!.id
+      const targetOwnerId =
+        req.user?.role === "admin" && ownerId ? ownerId : req.user!.id
 
       const store = await storeController.createStore(
         targetOwnerId,
@@ -141,10 +142,14 @@ router.get("/:id/metrics", async (req: AuthRequest, res) => {
 router.get("/me/store", requireAuth, async (req: AuthRequest, res) => {
   try {
     if (req.user?.role !== "store_owner" && req.user?.role !== "admin") {
-      return res.status(403).json({ error: "Only store owners can access this" })
+      return res
+        .status(403)
+        .json({ error: "Only store owners can access this" })
     }
 
-    const store = await storeController.getStoreWithRatingsByOwnerId(req.user!.id)
+    const store = await storeController.getStoreWithRatingsByOwnerId(
+      req.user!.id
+    )
 
     if (!store) {
       return res.status(404).json({ error: "No store found for this owner" })

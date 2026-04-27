@@ -17,7 +17,9 @@ router.get(
       const allRatings = await db.select().from(rating).execute()
 
       const normalUsers = allUsers.filter((u) => u.role === "user").length
-      const storeOwners = allUsers.filter((u) => u.role === "store_owner").length
+      const storeOwners = allUsers.filter(
+        (u) => u.role === "store_owner"
+      ).length
       const admins = allUsers.filter((u) => u.role === "admin").length
 
       const avgRating =

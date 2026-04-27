@@ -19,7 +19,6 @@ app.use(
   })
 )
 
-
 app.all("/api/auth/*splat", toNodeHandler(auth))
 
 app.get("/me", async (req, res) => {

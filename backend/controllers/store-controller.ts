@@ -154,9 +154,10 @@ export async function getStoreWithRatings(id: string) {
       .execute()
 
     const totalRatings = ratings.length
-    const averageRating = totalRatings > 0 
-      ? ratings.reduce((acc, r) => acc + r.rating, 0) / totalRatings 
-      : 0
+    const averageRating =
+      totalRatings > 0
+        ? ratings.reduce((acc, r) => acc + r.rating, 0) / totalRatings
+        : 0
 
     return {
       ...storeResult,
