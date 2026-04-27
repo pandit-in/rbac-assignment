@@ -20,24 +20,29 @@ app.use(
   })
 )
 
-app.all("/api/auth/*splat", toNodeHandler(auth))
+const apiRouter = express.Router()
 
-app.get("/me", async (req, res) => {
+apiRouter.all("/api/auth/*splat", toNodeHandler(auth))
+
+apiRouter.get("/me", async (req, res) => {
   const session = await auth.api.getSession({
     headers: fromNodeHeaders(req.headers),
   })
   return res.json(session)
 })
 
-app.use("/api/users", usersRouter)
-app.use("/api/stores", storesRouter)
-app.use("/api/ratings", ratingsRouter)
-app.use("/api/admin", adminRouter)
+apiRouter.use("/api/users", usersRouter)
+apiRouter.use("/api/stores", storesRouter)
+apiRouter.use("/api/ratings", ratingsRouter)
+apiRouter.use("/api/admin", adminRouter)
 
-// Health check
-app.get("/health", (req, res) => {
+apiRouter.get("/health", (req, res) => {
   res.json({ status: "ok" })
 })
+
+app.use("/_/backend", apiRouter)
+app.use("/", apiRouter)
+
 
 // Error handling middleware
 app.use(
