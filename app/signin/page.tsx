@@ -84,91 +84,129 @@ export default function SigninPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
-      <div className="w-full sm:max-w-sm">
-        <CardHeader className="mb-6">
-          <CardTitle>Sign In</CardTitle>
-          <CardDescription>Enter your details to sign in</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form id="signin-form" onSubmit={form.handleSubmit(onSubmit)}>
-            <FieldGroup>
-              <Controller
-                name="email"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="signin-form-email">Email</FieldLabel>
-                    <Input
-                      {...field}
-                      id="signin-form-email"
-                      type="email"
-                      placeholder="enter your email"
-                      aria-invalid={fieldState.invalid}
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
+    <div className="flex min-h-screen items-center justify-center px-4 py-12">
+      <div className="flex w-full max-w-4xl flex-col gap-8 lg:flex-row lg:items-center">
+        {/* Left side: Sign In Form */}
+        <div className="w-full lg:flex-1">
+          <div className="mx-auto max-w-sm">
+            <CardHeader className="mb-6 px-0">
+              <CardTitle className="text-2xl">Sign In</CardTitle>
+              <CardDescription>Enter your details to sign in</CardDescription>
+            </CardHeader>
+            <CardContent className="px-0">
+              <form id="signin-form" onSubmit={form.handleSubmit(onSubmit)}>
+                <FieldGroup>
+                  <Controller
+                    name="email"
+                    control={form.control}
+                    render={({ field, fieldState }) => (
+                      <Field data-invalid={fieldState.invalid}>
+                        <FieldLabel htmlFor="signin-form-email">Email</FieldLabel>
+                        <Input
+                          {...field}
+                          id="signin-form-email"
+                          type="email"
+                          placeholder="enter your email"
+                          aria-invalid={fieldState.invalid}
+                        />
+                        {fieldState.invalid && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
+                      </Field>
                     )}
-                  </Field>
-                )}
-              />
-              <Controller
-                name="password"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="signin-form-password">
-                      Password
-                    </FieldLabel>
-                    <InputGroup>
-                      <InputGroupInput
-                        {...field}
-                        id="signin-form-password"
-                        type={showPassword ? "text" : "password"}
-                        placeholder="enter your password"
-                        aria-invalid={fieldState.invalid}
-                      />
-                      <InputGroupAddon align="inline-end">
-                        <InputGroupButton
-                          variant="ghost"
-                          onClick={() => setShowPassword(!showPassword)}
-                          aria-label={
-                            showPassword ? "Hide password" : "Show password"
-                          }
-                        >
-                          {showPassword ? (
-                            <EyeOff className="h-4 w-4" />
-                          ) : (
-                            <Eye className="h-4 w-4" />
-                          )}
-                        </InputGroupButton>
-                      </InputGroupAddon>
-                    </InputGroup>
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
+                  />
+                  <Controller
+                    name="password"
+                    control={form.control}
+                    render={({ field, fieldState }) => (
+                      <Field data-invalid={fieldState.invalid}>
+                        <FieldLabel htmlFor="signin-form-password">
+                          Password
+                        </FieldLabel>
+                        <InputGroup>
+                          <InputGroupInput
+                            {...field}
+                            id="signin-form-password"
+                            type={showPassword ? "text" : "password"}
+                            placeholder="enter your password"
+                            aria-invalid={fieldState.invalid}
+                          />
+                          <InputGroupAddon align="inline-end">
+                            <InputGroupButton
+                              variant="ghost"
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}
+                              aria-label={
+                                showPassword ? "Hide password" : "Show password"
+                              }
+                            >
+                              {showPassword ? (
+                                <EyeOff className="h-4 w-4" />
+                              ) : (
+                                <Eye className="h-4 w-4" />
+                              )}
+                            </InputGroupButton>
+                          </InputGroupAddon>
+                        </InputGroup>
+                        {fieldState.invalid && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
+                      </Field>
                     )}
+                  />
+                  <Field>
+                    <Button
+                      className="w-full"
+                      type="submit"
+                      form="signin-form"
+                      disabled={isPending}
+                    >
+                      {isPending ? "Signing in..." : "Sign In"}
+                    </Button>
                   </Field>
-                )}
-              />
-              <Field>
-                <Button
-                  className="w-full"
-                  type="submit"
-                  form="signin-form"
-                  disabled={isPending}
-                >
-                  {isPending ? "Signing in..." : "Sign In"}
-                </Button>
-              </Field>
-              <FieldDescription className="mt-6">
-                Don&apos;t have an account?{" "}
-                <Link href="/signup" className="font-medium text-primary">
-                  Sign up
-                </Link>
-              </FieldDescription>
-            </FieldGroup>
-          </form>
-        </CardContent>
+                  <FieldDescription className="mt-6">
+                    Don&apos;t have an account?{" "}
+                    <Link href="/signup" className="font-medium text-primary">
+                      Sign up
+                    </Link>
+                  </FieldDescription>
+                </FieldGroup>
+              </form>
+            </CardContent>
+          </div>
+        </div>
+
+        {/* Right side: Demo Credentials */}
+        <div className="w-full lg:w-80">
+          <div className="rounded-xl border bg-muted/50 p-6">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Demo Credentials
+            </h3>
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs font-medium text-muted-foreground">Admin</p>
+                <code className="mt-1 block rounded bg-background p-2 text-xs">
+                  admin@roxiler.com<br/>Admin@123
+                </code>
+              </div>
+              <div>
+                <p className="text-xs font-medium text-muted-foreground">User</p>
+                <code className="mt-1 block rounded bg-background p-2 text-xs">
+                  user1@test.com<br/>User@123
+                </code>
+              </div>
+              <div>
+                <p className="text-xs font-medium text-muted-foreground">Store Owner</p>
+                <code className="mt-1 block rounded bg-background p-2 text-xs">
+                  owner1@store.com<br/>Owner@123
+                </code>
+              </div>
+            </div>
+            <p className="mt-6 text-[10px] leading-relaxed text-muted-foreground">
+              Note: Use these accounts to explore different Role-Based Access Control features.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   )

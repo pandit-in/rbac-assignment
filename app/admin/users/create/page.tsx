@@ -58,7 +58,6 @@ export default function AdminCreateUserPage() {
           email: data.email,
           password: data.password,
           address: data.address,
-          role: data.role,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any)
 
