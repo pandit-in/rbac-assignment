@@ -175,7 +175,11 @@ export default function StoreOwnerDashboard() {
               title="Store"
               value={activeStore.name}
               icon={<Store className="h-4 w-4" />}
-              description={activeStore.address}
+              description={
+                activeStore.address.length > 15
+                  ? activeStore.address.substring(0, 15) + "..."
+                  : activeStore.address
+              }
             />
           </div>
 

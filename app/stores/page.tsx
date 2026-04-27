@@ -137,7 +137,9 @@ export default function StoresPage() {
                     )}
                   </div>
                   <CardDescription className="line-clamp-1">
-                    {store.address}
+                    {store.address.length > 15
+                      ? store.address.substring(0, 15) + "..."
+                      : store.address}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-1 flex-col justify-between space-y-4">

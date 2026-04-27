@@ -64,11 +64,19 @@ export default function StoresPage() {
       sortable: true,
       render: (value) => {
         const name = String(value)
-        return name.length > 12 ? name.substring(0, 12) + "..." : name
+        return name.length > 15 ? name.substring(0, 15) + "..." : name
       },
     },
     { header: "Owner Email", accessor: "ownerEmail", sortable: true },
-    { header: "Address", accessor: "address", sortable: true },
+    {
+      header: "Address",
+      accessor: "address",
+      sortable: true,
+      render: (value) => {
+        const address = String(value)
+        return address.length > 15 ? address.substring(0, 15) + "..." : address
+      },
+    },
     { header: "Total Ratings", accessor: "totalRatings", sortable: true },
     {
       header: "My Rating",

@@ -62,11 +62,19 @@ export default function UsersPage() {
       sortable: true,
       render: (value) => {
         const name = String(value)
-        return name.length > 12 ? name.substring(0, 12) + "..." : name
+        return name.length > 15 ? name.substring(0, 15) + "..." : name
       },
     },
     { header: "Email", accessor: "email", sortable: true },
-    { header: "Address", accessor: "address", sortable: true },
+    {
+      header: "Address",
+      accessor: "address",
+      sortable: true,
+      render: (value) => {
+        const address = String(value || "null")
+        return address.length > 15 ? address.substring(0, 15) + "..." : address
+      },
+    },
     {
       header: "Role",
       accessor: "role",

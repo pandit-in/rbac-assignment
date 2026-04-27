@@ -42,13 +42,17 @@ export async function getAllUsers(
       }
     })
 
-    // Apply pagination
+    // Apply pagination and ensure address/role are present
     const paginatedResult = limit
       ? usersWithStats.slice(offset || 0, (offset || 0) + limit)
       : usersWithStats
 
     return {
-      users: paginatedResult,
+      users: paginatedResult.map(u => ({
+        ...u,
+        address: u.address || null, // Explicitly handle address
+        role: u.role || "user"
+      })),
       total: users.length,
     }
   } catch (error) {
