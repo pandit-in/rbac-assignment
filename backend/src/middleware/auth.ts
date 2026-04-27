@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from "express"
 import { auth } from "../lib/auth.js"
+import { fromNodeHeaders } from "better-auth/node"
 import type { User, Session } from "../db/schema/auth.js"
 
 export interface AuthRequest extends Request {
@@ -14,7 +15,7 @@ export const requireAuth = async (
 ) => {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(req.headers as any),
+      headers: fromNodeHeaders(req.headers),
     })
 
     if (!session) {
@@ -37,7 +38,7 @@ export const optionalAuth = async (
 ) => {
   try {
     const session = await auth.api.getSession({
-      headers: new Headers(req.headers as any),
+      headers: fromNodeHeaders(req.headers),
     })
 
     if (session) {
@@ -56,7 +57,7 @@ export const requireRole = (roles: string[]) => {
   return async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
       const session = await auth.api.getSession({
-        headers: new Headers(req.headers as any),
+        headers: fromNodeHeaders(req.headers),
       })
 
       if (!session || !roles.includes(session.user?.role || "")) {

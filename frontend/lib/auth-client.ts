@@ -3,12 +3,9 @@ import { adminClient } from "better-auth/client/plugins"
 
 export const authClient = createAuthClient({
   baseURL:
-    process.env.NEXT_PUBLIC_BETTER_AUTH_URL ||
-    (typeof window !== "undefined" &&
-    !window.location.hostname.includes("localhost")
-      ? "/api/auth"
-      : "http://localhost:3001/api/auth"),
-
+    process.env.NODE_ENV === "production"
+      ? process.env.NEXT_PUBLIC_BETTER_AUTH_URL
+      : "http://localhost:3001",
   user: {
     additionalFields: {
       role: {

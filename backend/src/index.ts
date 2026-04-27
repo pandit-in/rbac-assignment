@@ -9,20 +9,23 @@ import ratingsRouter from "./routes/ratings.js";
 import storesRouter from "./routes/stores.js";
 
 const app = express();
-app.set("trust proxy", true);
 const port = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || ["http://localhost:3000"],
+    origin:
+      process.env.NODE_ENV === "production"
+        ? process.env.FRONTEND_URL
+        : "http://localhost:3000",
     credentials: true,
   }),
 );
 
 const apiRouter = express.Router();
 
-apiRouter.all("/api/auth/*splat", toNodeHandler(auth));
+// Auth routes - mounted directly on app to prevent path stripping in apiRouter
+app.all("/api/auth/*splat", toNodeHandler(auth));
 
 apiRouter.get("/me", async (req, res) => {
   const session = await auth.api.getSession({
@@ -41,7 +44,6 @@ apiRouter.get("/health", (req, res) => {
 });
 
 app.use("/api", apiRouter);
-app.use("/", apiRouter);
 
 // Error handling middleware
 app.use(

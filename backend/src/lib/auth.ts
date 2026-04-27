@@ -1,11 +1,14 @@
-import { betterAuth } from "better-auth"
-import { admin } from "better-auth/plugins"
-import { drizzleAdapter } from "better-auth/adapters/drizzle"
-import { db } from "../db/index.js" // your drizzle instance
-import * as schema from "../db/schema/index.js"
+import { betterAuth } from "better-auth";
+import { admin } from "better-auth/plugins";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { db } from "../db/index.js"; // your drizzle instance
+import * as schema from "../db/schema/index.js";
 
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL:
+    process.env.NODE_ENV === "production"
+      ? process.env.BETTER_AUTH_URL
+      : "http://localhost:3001",
   database: drizzleAdapter(db, {
     provider: "pg",
     schema,
@@ -47,4 +50,4 @@ export const auth = betterAuth({
   },
 
   plugins: [admin()],
-})
+});
