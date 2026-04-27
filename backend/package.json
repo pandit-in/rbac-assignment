@@ -4,7 +4,6 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "vercel-build": "npm run prepare && next build",
     "dev": "bun --hot src/index.ts",
     "start": "bun src/index.ts",
     "db:generate": "drizzle-kit generate",

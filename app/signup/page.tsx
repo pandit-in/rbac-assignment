@@ -58,7 +58,7 @@ export default function SignupPage() {
           email: data.email,
           password: data.password,
           address: data.address,
-        })
+        } as any)
         if (result.error) {
           console.error("Sign up error:", result.error)
           toast(
