@@ -22,7 +22,15 @@ app.use(
   }),
 );
 
+console.log("Backend starting...");
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("FRONTEND_URL:", process.env.FRONTEND_URL);
+
 const apiRouter = express.Router();
+
+app.get("/", (req, res) => {
+  res.json({ status: "ok", message: "RBAC Backend is running" });
+});
 
 // Auth routes - mounted directly on app to prevent path stripping in apiRouter
 app.use("/api/auth", toNodeHandler(auth));
