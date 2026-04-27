@@ -19,10 +19,25 @@ app.use((req, res, next) => {
 });
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? (process.env.FRONTEND_URL?.replace(/\/$/, "") || "https://rbac-store.vercel.app")
-        : "http://localhost:3000",
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+
+      // Allow all backend URLs
+      if (origin.includes("rbac-assignment")) return callback(null, true);
+
+      // Allow local dev
+      if (origin.includes("localhost") || origin.includes("[IP_ADDRESS]")) {
+        return callback(null, true);
+      }
+
+      // Allow Render preview deploys
+      if (origin.includes("onrender.com") && origin.includes("preview")) {
+        return callback(null, true);
+      }
+
+      callback(new Error("Not allowed by CORS"), false);
+    },
     credentials: true,
   }),
 );
@@ -30,6 +45,7 @@ app.use(
 console.log("Backend starting...");
 console.log("NODE_ENV:", process.env.NODE_ENV);
 console.log("FRONTEND_URL:", process.env.FRONTEND_URL);
+console.log("BETTER_AUTH_URL:", process.env.BETTER_AUTH_URL);
 
 const apiRouter = express.Router();
 
