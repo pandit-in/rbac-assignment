@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, startTransition, useTransition } from "react"
+import { useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -73,7 +73,7 @@ export default function SettingsPage() {
     values: {
       name: session?.user?.name || "",
       email: session?.user?.email || "",
-      address: (session?.user as any)?.address || "",
+      address: (session?.user as { address?: string })?.address || "",
 
       currentPassword: "",
       newPassword: "",
@@ -87,7 +87,7 @@ export default function SettingsPage() {
         await authClient.updateUser({
           name: data.name,
           address: data.address,
-        } as any)
+        } as { name?: string; address?: string })
 
 
         // Then change password

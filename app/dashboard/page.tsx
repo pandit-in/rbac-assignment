@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useMemo } from "react"
 import { authClient } from "@/lib/auth-client"
 import { RatingStars } from "@/components/rating-stars"
 import { KPICard } from "@/components/kpi-card"

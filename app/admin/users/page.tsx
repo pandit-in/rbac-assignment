@@ -35,7 +35,7 @@ export default function UsersPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null)
   const [isDeleting, setIsDeleting] = useState(false)
 
-  const { data: usersData, error, mutate } = useSWR("/api/users", fetcher)
+  const { data: usersData, error, mutate } = useSWR<{ users: User[] }>("/api/users", fetcher)
   const users: User[] = usersData?.users || []
   const isLoading = !usersData && !error
 

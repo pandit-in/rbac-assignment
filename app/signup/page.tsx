@@ -58,7 +58,7 @@ export default function SignupPage() {
           email: data.email,
           password: data.password,
           address: data.address,
-        } as any)
+        } as { name: string; email: string; password: string; address?: string })
         if (result.error) {
           console.error("Sign up error:", result.error)
           let errorMessage = "Failed to create account. Please try again."

@@ -48,7 +48,7 @@ export default function StoresPage() {
     data: storesData,
     error: storesError,
     mutate,
-  } = useSWR(isAuthenticated ? "/api/stores" : null, fetcher)
+  } = useSWR<{ data: Store[] }>(isAuthenticated ? "/api/stores" : null, fetcher)
 
   const stores: Store[] = storesData?.data || []
   const isLoadingStores = !storesData && !storesError && isAuthenticated
@@ -65,7 +65,7 @@ export default function StoresPage() {
       toast.success("Rating submitted!")
       mutate()
     } catch (err) {
-      toast.error("Failed to submit rating")
+      toast.error((err as Error).message || "Failed to submit rating")
     }
   }
 

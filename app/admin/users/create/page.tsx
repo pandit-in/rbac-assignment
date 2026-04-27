@@ -58,8 +58,9 @@ export default function AdminCreateUserPage() {
           email: data.email,
           password: data.password,
           address: data.address,
-          role: data.role as "user" | "admin" | "store_owner",
-        })
+          role: data.role,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } as any)
 
         if (result.error) {
           console.error("Create user error:", result.error)

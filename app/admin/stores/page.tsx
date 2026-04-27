@@ -38,7 +38,7 @@ export default function StoresPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null)
   const [isDeleting, setIsDeleting] = useState(false)
 
-  const { data: storesData, error, mutate } = useSWR("/api/stores", fetcher)
+  const { data: storesData, error, mutate } = useSWR<{ data: Store[] }>("/api/stores", fetcher)
   const stores: Store[] = storesData?.data || []
   const isLoading = !storesData && !error
 
@@ -51,7 +51,7 @@ export default function StoresPage() {
       toast.success("Store deleted successfully")
       setDeleteId(null)
     } catch (err) {
-      toast.error("Failed to delete store")
+      toast.error((err as Error).message || "Failed to delete store")
     } finally {
       setIsDeleting(false)
     }
