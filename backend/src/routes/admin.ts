@@ -1,8 +1,8 @@
 import { Router } from "express"
-import { requireRole } from "../middleware/auth"
-import { db } from "../db"
-import type { AuthRequest } from "../middleware/auth"
-import { user as users, store as stores, rating } from "../db/schema"
+import { requireRole } from "../middleware/auth.js"
+import { db } from "../db/index.js"
+import type { AuthRequest } from "../middleware/auth.js"
+import { user as users, store as stores, rating } from "../db/schema/index.js"
 
 const router = Router()
 

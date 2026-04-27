@@ -1,7 +1,7 @@
 import { pgTable, text, timestamp } from "drizzle-orm/pg-core"
-import { user } from "./auth"
+import { user } from "./auth.js"
 import { relations } from "drizzle-orm"
-import { rating } from "./rating"
+import { rating } from "./rating.js"
 
 export const store = pgTable("store", {
   id: text("id").primaryKey(),

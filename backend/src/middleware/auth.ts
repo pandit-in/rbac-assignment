@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express"
-import { auth } from "../lib/auth"
-import type { User, Session } from "../db/schema/auth"
+import { auth } from "../lib/auth.js"
+import type { User, Session } from "../db/schema/auth.js"
 
 export interface AuthRequest extends Request {
   user?: User

@@ -1,7 +1,7 @@
 import { Router } from "express"
-import { requireAuth, requireRole, type AuthRequest } from "../middleware/auth"
-import * as storeController from "../../controllers/store-controller"
-import * as ratingController from "../../controllers/rating-controller"
+import { requireAuth, requireRole, type AuthRequest } from "../middleware/auth.js"
+import * as storeController from "../../controllers/store-controller.js"
+import * as ratingController from "../../controllers/rating-controller.js"
 
 const router = Router()
 

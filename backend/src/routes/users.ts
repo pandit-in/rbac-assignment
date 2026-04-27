@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { requireRole, type AuthRequest } from "../middleware/auth"
-import * as userController from "../../controllers/user-controller"
+import { requireRole, type AuthRequest } from "../middleware/auth.js"
+import * as userController from "../../controllers/user-controller.js"
 
 const router = Router()
 

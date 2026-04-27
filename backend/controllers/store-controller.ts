@@ -1,5 +1,5 @@
-import { db } from "../src/db"
-import { store, rating, user } from "../src/db/schema"
+import { db } from "../src/db/index.js"
+import { store, rating, user } from "../src/db/schema/index.js"
 import { eq, like, or, desc, sql } from "drizzle-orm"
 import { randomUUID } from "node:crypto"
 

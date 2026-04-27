@@ -2,11 +2,11 @@ import "dotenv/config"
 import express from "express"
 import cors from "cors"
 import { fromNodeHeaders, toNodeHandler } from "better-auth/node"
-import { auth } from "./lib/auth"
-import adminRouter from "./routes/admin"
-import usersRouter from "./routes/users"
-import ratingsRouter from "./routes/ratings"
-import storesRouter from "./routes/stores"
+import { auth } from "./lib/auth.js"
+import adminRouter from "./routes/admin.js"
+import usersRouter from "./routes/users.js"
+import ratingsRouter from "./routes/ratings.js"
+import storesRouter from "./routes/stores.js"
 
 const app = express()
 const port = process.env.PORT || 3001

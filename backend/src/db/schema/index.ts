@@ -1,3 +1,3 @@
-export * from "./auth"
-export * from "./store"
-export * from "./rating"
+export * from "./auth.js"
+export * from "./store.js"
+export * from "./rating.js"

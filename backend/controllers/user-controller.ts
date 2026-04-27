@@ -1,5 +1,5 @@
-import { db } from "../src/db"
-import { user, rating, store } from "../src/db/schema"
+import { db } from "../src/db/index.js"
+import { user, rating, store } from "../src/db/schema/index.js"
 import { eq, sql } from "drizzle-orm"
 
 export async function getAllUsers(

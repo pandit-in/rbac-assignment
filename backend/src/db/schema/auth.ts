@@ -7,8 +7,8 @@ import {
   index,
   pgEnum,
 } from "drizzle-orm/pg-core"
-import { store } from "./store"
-import { rating } from "./rating"
+import { store } from "./store.js"
+import { rating } from "./rating.js"
 
 export const userRoleEnum = pgEnum("user_role", [
   "store_owner",

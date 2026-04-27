@@ -1,5 +1,5 @@
-import { db } from "../src/db"
-import { rating, store, user } from "../src/db/schema"
+import { db } from "../src/db/index.js"
+import { rating, store, user } from "../src/db/schema/index.js"
 import { eq, and } from "drizzle-orm"
 
 export async function getRatingsByStore(storeId: string) {

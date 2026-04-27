@@ -6,8 +6,8 @@ import {
   integer,
   uniqueIndex,
 } from "drizzle-orm/pg-core"
-import { user } from "./auth"
-import { store } from "./store"
+import { user } from "./auth.js"
+import { store } from "./store.js"
 import { relations } from "drizzle-orm"
 
 export const rating = pgTable(
